@@ -1,0 +1,44 @@
+{{#each renderedCaches}}
+<div class="card main-card rounded-0 p-2 shadow-lg blue-border m-2" data-ID="{{@key}}">
+    <div class="card-header pr-0 pl-0 pb-2">
+        {{#each this.tagArray}}
+        <span class="badge cache-snippet-badge badge-pill badge-warning content-font">{{this}}</span>
+        {{/each}}
+    </div>
+    <div class="card-block heading-font">
+        <ul class="nav nav-tabs m-2" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link" href="#{{@key}}1" role="tab" data-toggle="tab">Action</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="#{{@key}}2" role="tab" data-toggle="tab">Info</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in p-2" id="{{@key}}1">
+                <button class="btn btn-block mt-3 mb-3 btn-danger delete-snippet">Delete Snippet</button>
+                <button class="btn remove-cache-tag btn-block mt-3 mb-3 cache-btn">Remove Tag</button>
+                <div class="input-group mb-3">
+                    <input class="form-control add-tag-input" type="text" placeholder="Add a tag">
+                    <div class="input-group-append">
+                        <button class="btn add-tag-btn cache-btn">Add tag</button>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class=" active show tab-pane fade" id="{{@key}}2">
+                <div class="query-col">
+                    <h5 class="heading-font">
+                        <a target="_blank" class="cache-snip-url" href="{{this.URL}}">{{this.URL}}</a>
+                    </h5>
+                </div>
+                <div class="query-col">
+                    <p class="cache-snip-text" class="content-font">
+                        {{this.Text}}
+                    </p>
+                </div>
+            </div>
+        </div> 
+    </div>
+</div> 
+{{/each}}
+

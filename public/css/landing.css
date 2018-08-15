@@ -1,0 +1,326 @@
+:root {
+    --blue-color: #252839;
+    --dark-grey-color: #677077;
+    --light-grey-color: #b5b5b7;
+    --yellow-color: #F8981D
+}
+
+
+/* General Styles */
+
+html {
+    height: 100%;
+    box-sizing: border-box;
+  }
+  
+  *,
+  *:before, 
+  *:after { 
+    box-sizing: inherit;
+  }
+   
+  body {
+    position: relative;
+    padding-bottom: 1rem;
+    margin: 0;
+    min-height: 100%;
+  }
+
+.main {
+margin: 0 auto 100px auto; 
+}
+
+
+.heading-font { 
+    font-family: 'Abril Fatface', cursive;
+}
+
+.content-font {
+    font-family: 'Roboto', sans-serif;
+} 
+
+ /* Navbar Styling  */
+                                                                                                                                                                                                   
+#navbar { 
+    background-color: var(--blue-color); 
+}
+
+#db-nav-logo {
+    color: var(--yellow-color); 
+}
+
+#landing-logo {
+    width: 50px; 
+    border-radius: 50%; 
+}
+
+#landing-header {
+  color: var(--yellow-color); 
+}
+
+#landing-qMark {
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    cursor: pointer; 
+}
+
+#log-in {
+    background-color: var(--yellow-color); 
+    color: var(--blue-color); 
+}
+
+#log-in:hover {
+    text-decoration: none;
+    background-color: white; 
+    color: var(--blue-color); 
+}
+
+#landing-page-main {
+    width: 100vw; 
+}
+
+#landing-page-title {
+    color: var(--yellow-color);
+    position: absolute;
+    top: 10px; 
+    right: 30px;
+}
+
+
+/* Div with the about information */
+#about-div {
+    color: var(--yellow-color);
+    position: absolute;
+    top: 70px; 
+    right: 30px;
+    height: 80%;
+    background-color: white;
+}
+
+#landing-pg-modal-content{
+    color: var(--blue-color);
+    text-align: left; 
+    line-height: 1.8em; 
+    border-style: inset;
+    border-color: var(--yellow-color);
+}
+
+#landing-modal-br {
+    width: 100%; 
+    height: 40%; 
+}
+
+#landing-modal-section {
+    color: var(--blue-color); 
+    text-align: left; 
+    border-style: inset; 
+    border-color: var(--yellow-color);
+    border-width: thick;
+    height: 60%; 
+}
+
+#landing-page-br {
+    width: inherit; 
+    height: inherit; 
+}
+
+#landing-page-about{
+    width: 100vw; 
+}
+
+.landing-tile-img {
+    width: inherit; 
+    height: 100%; 
+}
+
+.tile-header {
+    color: var(--blue-color);
+    background: var(--light-grey-color);
+}
+
+/* Fade Animation */
+.fade-container {
+    background-color: var(--yellow-color); 
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: var(--blue-color); 
+  }
+
+  .tile-container {
+      max-width: 500px; 
+  }
+  
+  .tile-container:hover .overlay {
+    opacity: 1;
+  }
+  
+  .overlay-info {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: var(--light-grey-color);
+  }
+
+  .footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    background-color: var(--blue-color);
+    color: var(--yellow-color);
+    text-align: center;
+  }
+
+  /* Login Modal Styling*/ 
+
+.modal-content {
+    border-style: inset; 
+    border-color: var(--yellow-color);
+    border-width: thick;
+}
+.nav-link {
+    color: var(--blue-color);
+}
+
+.welcome-text {
+    background: rgba(3, 17, 56, 0.6);
+    color: var(--yellow-color)
+}
+
+form h2 {
+    color: var(--dark-grey-color);
+}
+
+form i {
+    color: var(--light-grey-color);
+}
+
+.login-form {
+    width: 385px;
+    margin: 30px auto;
+}
+.login-form form {        
+    margin-bottom: 15px;
+    background: #f7f7f7;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+}
+.login-form h2 {
+    margin: 0 0 15px;
+    color: var(--blue-color);
+}
+.form-control, .login-btn {
+    min-height: 38px; 
+    border-radius: 2px;
+}
+.input-group-addon .fa {
+    font-size: 18px;
+}
+.login-btn {
+    font-size: 15px;
+    font-weight: bold;
+    background-color: var(--yellow-color); 
+}
+
+.login-btn:hover {
+    opacity: 0.9;
+}
+
+.social-btn .btn {
+    border: none;
+    margin: 10px 3px 0;
+    opacity: 1;
+}
+.social-btn .btn:hover {
+    opacity: 0.9;
+}
+.social-btn .btn-danger {
+    background: #df4930;
+}
+.or-seperator {
+    margin-top: 20px;
+    text-align: center;
+    border-top: 1px solid #ccc;
+}
+.or-seperator i {
+    padding: 0 10px;
+    background: #f7f7f7;
+    position: relative;
+    top: -11px;
+    z-index: 1;
+}    
+
+
+/* Media Queries */
+
+  @media screen and (max-width: 780px) {
+
+    #landing-logo{
+       display: none; 
+    }
+
+    #log-in{
+        display: inline;
+        margin: auto !important;
+    }
+
+    #landing-header {
+        margin-bottom: 10px; 
+    }
+
+    #navbar-nav {
+        align-items: initial; 
+    }
+
+    #landing-page-main {
+        display: none; 
+    }
+
+    .tile-container {
+        margin-bottom: 20px; 
+        background-color: white; 
+        padding-top: 10px; 
+    }
+
+    .overlay-info {
+        font-size: 95%; 
+    }
+
+    body {
+        background-color: var(--light-grey-color); 
+    }
+  }
+
+  @media screen and (max-width: 1000px) {
+    #landing-page-main {
+        height: 50vh;   
+    }
+    #about-div {
+        width: 80%;
+    }
+  }
+
+  @media screen and (min-width: 1600px) {
+    #landing-page-main {
+        height: 50vh; 
+    }
+    #about-div {
+        width: 30%;
+    }
+  } 
+

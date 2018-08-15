@@ -1,0 +1,34 @@
+{
+  "name": "group-project-2",
+  "version": "1.0.0",
+  "description": "One Paragraph of project description goes here",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "watch": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hAckeDD-bootcampTeam/Project-2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hAckeDD-bootcampTeam/Project-2/issues"
+  },
+  "homepage": "https://github.com/hAckeDD-bootcampTeam/Project-2#readme",
+  "dependencies": {
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.15.6",
+    "mysql2": "^1.6.1",
+    "nodemon": "^1.18.3",
+    "path": "^0.12.7",
+    "sequelize": "^4.38.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.3.0"
+  }
+}

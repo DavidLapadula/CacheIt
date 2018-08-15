@@ -1,0 +1,75 @@
+ {{!-- Landing Page StyleSheet --}}
+<link type="text/css" rel="stylesheet" href="css/landing.css"> {{!-- Navbar --}}
+<nav id="navbar" class="navbar navbar-expand-md pt-2">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon border">
+            <i id="db-nav-logo" class="fas fa-database"></i>
+        </span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav w-100 d-flex align-items-center pt-1 pb-1">
+            <img id="landing-logo" src="images/usb_logo.png" class="mr-2">
+            <h4 id="landing-header" class="heading-font">Share and Store, Simply</h4>
+            <a id="log-in" href="/home" class="p-2 rounded-0 heading-font rounded ml-auto" target="_blank">Start Caching </a>
+        </div>
+    </div>
+</nav>
+
+{{!-- Content section begins --}}
+<div class="main">
+    <div class="row">
+        <div id="landing-page-main" class="col-12 text-center mt-2">
+            <img id="landing-page-br" src="images/data_br.jpg">
+            <div id="landing-page-title">
+                <h2 class="heading-font d-inline mr-2">About Cache-it</h2>
+                <i id="landing-qMark" class="fas fa-question-circle fa-3x animated pulse"></i>
+            </div>
+            <div id="about-div" class="col-lg-6 p-0">
+                <img id="landing-modal-br" src="images/landing_share_data.jpg">
+                <section id="landing-modal-section" class="heading-font p-4 d-flex align-items-center h6">
+                    <div class="w-100">
+                        Tired of having access to so much information and nowhere to put it?
+                        <hr> Cache-it is the last stop on the information superhighway.
+                        <hr> Consolidate all things you find interesting on the World Wide Web.
+                        <hr> Sound good? then GET CACHING!
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <div id="landing-page-about" class="row mt-3 mr-0 ml-0 p-3 justify-content-center">
+        <div class="col-lg-4 col-md-10 tile-container">
+            <h2 class="heading-font text-center tile-header rounded">Store</h2>
+            <div class="fade-container p-2 h-75 w-100">
+                <img src="images/landing_store_data.jpg" class="landing-tile-img">
+            </div>
+            <div class="overlay">
+                <div class="overlay-info content-font h5 w-100 p-2">
+                    Store useful snippets of information from the internet.
+                    <hr class="border border-white"> Save the URL where you found it.
+                    <hr class="border border-white"> Search subreddits for related information!
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-10 tile-container">
+            <h2 class="heading-font text-center tile-header rounded">Tag</h2>
+            <div class="fade-container p-2 h-75 w-100">
+                <img src="images/landing_tag_data.jpg" class="landing-tile-img">
+            </div>
+            <div class="overlay">
+                <div class="overlay-info content-font h5 w-100 p-2">
+                    Associate all your data with tags
+                    <hr class="border border-white"> Easily search everything you have stored
+                    <hr class="border border-white"> Apply tags to your group projects!
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer content-font">
+        <i class="far fa-copyright"></i> HACKEDD Development Team 2018</div>
+</div>
+
+
+{{!-- Landing Page Javascript File --}}
+<script src="js/landing.js"></script>
