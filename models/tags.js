@@ -1,4 +1,7 @@
 /*eslint-disable */
+
+// snippet object model
+
 module.exports = function(sequelize, DataTypes) {
     let tagObj = sequelize.define("tagObj", {
         tagName: {

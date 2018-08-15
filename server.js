@@ -3,7 +3,6 @@
 // Package dependenies
 const express = require('express');
 const bodyParser = require('body-parser');
-var session = require("express-session");
 const app = express();
 const PORT = process.env.PORT || 8080;
 

@@ -43,15 +43,6 @@ $(document).ready(function () {
     let searchTag = $('.searchTags');
     let clearTag = $('.clear-cache-search');
 
-
-    // Remove a tag from snippet in personal cache
-    let removeTagBtn = $('.remove-cache-tag');
-    let cacheTag = $('.cache-snippet-badge');
-
-    // delete entire snippet from personal cache
-    let deleteSnip = $('.delete-snippet');
-
-
     // Flags for removing tags from personal cache
     let removeTagBool = false;
 
@@ -85,6 +76,7 @@ $(document).ready(function () {
 
     // PERSONAL CACHE FUNTIONALITY BEGINS
 
+    // allow the user to pull all the caches objects or one selected
     [searchTag, clearTag].forEach(function (el) {
         el.click(function () {
 
@@ -122,6 +114,7 @@ $(document).ready(function () {
                 snipTag: newSnipTag.val().trim(),
             }
 
+            // make sure it is an email address
             let expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
             let regex = new RegExp(expression);
             let url = snipObj.snipName;
@@ -151,6 +144,7 @@ $(document).ready(function () {
         }
     });
 
+
     // Add tag click event when adding to personal cache
     $(document).on('click', '.add-tag-btn', function () {
 
@@ -171,9 +165,15 @@ $(document).ready(function () {
                 type: 'POST',
                 data: newTagObj
             }).done((newTag) => {
+
+                console.log(newTag);
+
+
                 if (newTag === 'Created') {
                     console.log('Good Tag creation');
                     tagVal.val('')
+                } else {
+                    alert('Bad Request')
                 }
 
             });
@@ -182,14 +182,12 @@ $(document).ready(function () {
         }
     });
 
-    // Remove a tag from a specific snippet in personal cache
+    
 
+    // Remove a tag from a specific snippet in personal cache
     $(document).on('click', '.remove-cache-tag', function () {
 
-        console.log($(this).closest('.card-header'))
         let badges = $(this).parents('.card').find('.cache-snippet-badge');
-
-        console.log(badges)
 
         for (let i = 0; i < badges.length; i++) {
             $(badges[i]).addClass("bg-danger");
@@ -207,7 +205,7 @@ $(document).ready(function () {
                 removedTag: $(this).text()
             }
 
-
+        // remove the red from the elements and turn off boolean
           $(this).removeClass("bg-danger");
           removedTagBool = false; 
 
