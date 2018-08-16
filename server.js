@@ -29,11 +29,6 @@ app.set('view engine', 'handlebars');
 // Import routes and give the server access to them.
 require('./routes/html-routes.js')(app);
 require("./routes/api-routes.js")(app);
-// require("./routes/users-api-routes.js")(app);
-
-
-// Instantiate listener
-//E's testing-seeding table
 
 // Instantiate listener
 db.sequelize.sync().then(function () {

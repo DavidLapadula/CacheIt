@@ -1,5 +1,9 @@
 {{#each renderedCaches}}
 <div class="card main-card rounded-0 p-2 shadow-lg blue-border m-2" data-ID="{{@key}}">
+    <div class="card-header heading-font">   
+        Created at <br>
+     {{this.date}}
+    </div> 
     <div class="card-header pr-0 pl-0 pb-2">
         {{#each this.tagArray}}
         <span class="badge cache-snippet-badge badge-pill badge-warning content-font">{{this}}</span>

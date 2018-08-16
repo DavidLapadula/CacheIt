@@ -58,7 +58,8 @@ module.exports = function (app) {
           let cacheDataObj = {
             URL: el.dataValues.URL,
             Text: el.dataValues.text,
-            tagArray: tags
+            tagArray: tags, 
+            date: el.dataValues.createdAt
           }
           caches.renderedCaches[cacheID] = cacheDataObj;
         });
@@ -97,7 +98,8 @@ module.exports = function (app) {
             let cacheDataObj = {
               URL: el.dataValues.URL,
               Text: el.dataValues.text,
-              tagArray: tags
+              tagArray: tags, 
+              tagArray: tags, 
             }
             caches.renderedCaches[cacheID] = cacheDataObj;
           });
@@ -142,9 +144,6 @@ module.exports = function (app) {
         res.sendStatus('409')
       }
     })
-
-
-
   });
 
 
@@ -190,3 +189,5 @@ module.exports = function (app) {
 
 
 };
+
+
