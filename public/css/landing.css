@@ -32,6 +32,8 @@ margin: 0 auto 0 auto;
 min-height: 100%; 
 }
 
+/* Content Styling */
+
 #log-in {
   color: var(--blue-color); 
   background-color: var(--yellow-color); 
@@ -163,8 +165,22 @@ line-height: 40px;
 }
 
 
-@media screen and (max-width: 475px) {
- .overlay-info {
-   font-size: 100%; 
- }
+@media screen and (max-width: 475px) { 
+  .overlay-info {
+    font-size: 100%; 
+  }
+  .cover-container{
+    display: table-cell; 
+  }
+  #display-header, .cover-container {
+    padding: 0px !important; 
+  }
+
+  #header-cache {
+    font-size: 3rem !important; 
+  }
+
+  #landing-page-about {
+    padding: 5px !important; 
+  }
 }

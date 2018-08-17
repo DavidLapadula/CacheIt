@@ -2,7 +2,7 @@
 
 // making the model for the entire cache object
 module.exports = function(sequelize, DataTypes) {
-    let cacheObj = sequelize.define("cacheObj", {
+    let cacheObj = sequelize.define('cacheObj', {
       URL: {
         type: DataTypes.STRING,
         allowNull: false
@@ -13,12 +13,10 @@ module.exports = function(sequelize, DataTypes) {
       }
     });
  
-
     cacheObj.associate = function(models) {
       cacheObj.hasMany(models.tagObj, {
-          onDelete: "cascade"
+          onDelete: 'cascade'
       }); 
-  } 
-
+  }; 
     return cacheObj; 
   };

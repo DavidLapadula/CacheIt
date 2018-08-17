@@ -24,7 +24,6 @@ body {
     padding-bottom: 1rem;
     margin: 0;
     min-height: 100%;
-    background: url("../images/projs_br_5.jpg"); 
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -38,6 +37,14 @@ a {
 a:hover {
     color: var(--yellow-color);
     text-decoration: none
+}
+
+.heading-font {
+    font-family: 'Libre Baskerville', serif;
+} 
+
+.content-font {
+    font-family: 'Noto Sans', sans-serif;
 }
 
 ul {
@@ -55,15 +62,26 @@ li {
 }  
 
 
-.content-font, .heading-font {
-    font-family: 'Roboto', sans-serif;
-} 
-
-
 /* Main Content Styling */
 
 #home-main-content {
     width: 100vw; 
+    background: url("../images/world_br.jpg"); 
+    background-size: cover; 
+    background-attachment: fixed;
+    background-position: center; 
+    display: table;
+    min-height: 44rem;
+    background-repeat: no-repeat;
+}
+
+.cover-inner {
+    display: table-cell;
+    vertical-align: middle; 
+  }
+
+.jumbotron-heading {
+    color: var(--yellow-color)
 }
 
 .home-tile {
@@ -77,74 +95,57 @@ li {
     background: rgba(3, 17, 56, 0.6);
 }
 
-.home-arrow {
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
-    cursor: pointer; 
-    height: 35px; 
-    width: 35px; 
-    background-color: var(--yellow-color); 
-    position: relative; 
-    top: 0; 
-    margin-top: 10px; 
+.btn-style{
+    color: var(--yellow-color);
+    background-color: var(--blue-color);
+}
+
+.btn-style:hover {
+    background-color: var(--yellow-color);
+    color: var(--blue-color);
 }
 
 .home-main-div {
     width: 70vw; 
     max-width: 1000px;
     min-height: 200px; 
-    background-color: white; 
-    background: rgba(196, 193, 193, 0.658);
 }
 
-.cache-btn {
+#home-btn {
+    background-color: var(--yellow-color);
+    color: var(--blue-color);
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+}
+
+#cache-btn {
     background-color: var(--yellow-color);
     color: var(--blue-color);
 }
 
-.cache-btn:hover {
-    color: var(--yellow-color);
-    background-color: var(--blue-color);
+#cache-btn:hover {
+   transform: scale(1.2); 
 }
 
+#reddit-btn {
+    background-color: var(--yellow-color);
+    color: var(--blue-color);
+}
+
+#reddit-btn:hover {
+    transform: scale(1.2); 
+}
 
 #reddit-clear-btn {
     background-color: var(--yellow-color);
     color: var(--blue-color)
 }
 
-
-#custom-search-form {
-    margin:0;
-    margin-top: 5px;
-    padding: 0;
+#reddit-img {
+    width : 250px; 
+    height: 150px; 
 }
-
-
-#custom-search-form .search-query {
-    padding-right: 3px;
-    padding-right: 4px \9;
-    padding-left: 3px;
-    padding-left: 4px \9;
-    margin-bottom: 0;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-}
-
-#custom-search-form button {
-    border: 0;
-    background: none;
-    padding: 2px 5px;
-    margin-top: 2px;
-    position: relative;
-    left: -28px;
-    margin-bottom: 0;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-}
-
 
 .reddit-query-row {
     border-style: inset; 
@@ -186,50 +187,28 @@ li {
 
 }
 
-.btn-circle.btn-xl {
-    width: 50px;
-    height: 50px; 
-    padding: 5px 8px;
-    border-radius: 35px;
-    font-size: 24px;
-    line-height: 1.33;
-    color: var(--yellow-color);
-    background-color: var(--blue-color);
+.search-list {
+    background: rgba(3, 17, 56, 0.4); 
 }
-
-  .search-list {
-    background: rgba(3, 17, 56, 0.4);
-    border-style: inset; 
-    border-color: var(--yellow-color);
-  }
 
  
 /* Media Queries */
 
-@media screen and (max-width: 900px) { 
-    #group-modal-settings {
-        width: 90%; 
-    }
-
-}
-
-
-
-  @media screen and (max-width: 768px) {
-    .home-tile-img  {
-        display: none
-    }
-
+@media screen and (max-width: 650px) { 
     .home-main-div {
-        width: 90vw; 
-    } 
-
-    #group-modal-settings {
-        width: 90%; 
+        width: 100vw; 
+    }
+    .jumbotron-heading{
+      font-size: 3rem !important; 
     }
 
+    #home-main-content {
+        height: 300px;
+        min-height: 0rem;  
+    }
 
   }
+
 
 
 

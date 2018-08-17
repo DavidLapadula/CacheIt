@@ -3,7 +3,7 @@
 // snippet object model
 
 module.exports = function(sequelize, DataTypes) {
-    let tagObj = sequelize.define("tagObj", {
+    let tagObj = sequelize.define('tagObj', {
         tagName: {
             type: DataTypes.STRING,
             allowNull: false, 
@@ -18,7 +18,7 @@ module.exports = function(sequelize, DataTypes) {
         foreignKey: {
           allowNull: false, 
         },
-        onDelete: "cascade"
+        onDelete: 'cascade'
       }); 
     };  
  

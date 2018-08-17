@@ -1,6 +1,8 @@
  {{!-- Landing Page StyleSheet --}}
 <link type="text/css" rel="stylesheet" href="css/landing.css"> 
 <div class="main">
+
+	{{!-- Display navbar and starter text --}}
 	<section class="cover-1 text-center">
 		<nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
 			<div class="container content-font">
@@ -17,7 +19,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">Check out the code</a>
+							<a class="nav-link" href="https://github.com/DavidLapadula/proj2_backup" target="_blank">Check out the code</a>
 						</li>
 					</ul>
 				</div>
@@ -25,25 +27,27 @@
 		</nav>
 		<div class="cover-container p-4">
 			<div class="cover-inner container">
-				<div class="p-4">
+				<div id="display-header" class="p-4">
 					<h1 class="jumbotron-heading heading-font display-2 text-white">
-						<strong>Cache-It.</strong>
+						<strong id="header-cache">Cache-It.</strong>
 					</h1>
 					<p class="lead content-font text-white">Download the chrome plugin for ultimate caching abilities!</p>
 
 					<p>
-						<a href="/home" id="log-in" class="btn btn-lg content-font">Start Caching</a>
+						<a href="/home" id="log-in" class="btn btn-lg content-font" target="_blank">Start Caching</a>
 					</p>
 				</div>
 					<i class="fas fa-arrow-down fa-5x"></i>
 			</div>
 		</div>
 	</section>
+
+	{{!-- Overlayed Images on the landing page --}}
 	<div id="landing-page-about" class="row mr-0 ml-0 justify-content-center p-5">
 		<div class="col-lg-4 col-md-10 col-sm-12 tile-container">
 			<h2 class="text-center tile-header rounded">Store</h2>
 			<div class="fade-container p-2 h-75 w-100">
-				<img src="images/projs_br_5.jpeg" class="landing-tile-img">
+				<img src="images/projs_br_5.jpg" class="landing-tile-img">
 			</div>
 			<div class="overlay landing-color">
 				<div class="overlay-info content-font h3 w-100 p-2">

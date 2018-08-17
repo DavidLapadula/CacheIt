@@ -1,7 +1,9 @@
+{{!-- Partial for each of the snippets retrieved by the query --}}
+
 {{#each renderedCaches}}
 <div class="card main-card rounded-0 p-2 shadow-lg blue-border m-2" data-ID="{{@key}}">
     <div class="card-header heading-font">   
-        Created at <br>
+        Last Updated <br>
      {{this.date}}
     </div> 
     <div class="card-header pr-0 pl-0 pb-2">
@@ -21,11 +23,11 @@
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade in p-2" id="{{@key}}1">
                 <button class="btn btn-block mt-3 mb-3 btn-danger delete-snippet">Delete Snippet</button>
-                <button class="btn remove-cache-tag btn-block mt-3 mb-3 cache-btn">Remove Tag</button>
+                <button class="btn remove-cache-tag btn-block mt-3 mb-3 cache-btn btn-style">Remove Tag</button>
                 <div class="input-group mb-3">
                     <input class="form-control add-tag-input" type="text" placeholder="Add a tag">
                     <div class="input-group-append">
-                        <button class="btn add-tag-btn cache-btn">Add tag</button>
+                        <button class="btn add-tag-btn cache-btn btn-style">Add tag</button>
                     </div>
                 </div>
             </div>

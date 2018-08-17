@@ -1,52 +1,39 @@
 
 
 // Requiring our models and passport as we've configured it
-var db = require('../models');
+let db = require('../models');
+let moment = require('moment');
+
 
 module.exports = function (app) {
-
-  // HOME PAGE 
-
-  // Personal cache routes
 
   // add a cache bject
   app.post('/newPersSnip', function (req, res) {
 
-    let extensionInput; 
- 
+    let extensionInput;
 
-    if(typeof req.body === 'string') {
-      extensionInput = JSON.parse(req.body); 
+    // Check to see if request coming  from web page or extension
+    if (typeof req.body === 'string') {
+      extensionInput = JSON.parse(req.body);
     } else {
-      extensionInput = req.body; 
+      extensionInput = req.body;
     }
-
     let { snipName, snipDesc, snipTag } = extensionInput;
-
 
     if (!snipName || !snipDesc || !snipTag) {
       res.sendStatus('400');
-      console.log('no')
     } else {
-      console.log('yes')
       res.sendStatus('201');
-      console.log(snipName);
-      console.log(snipDesc);
-      console.log(snipTag);
-
       db.cacheObj.create({
         URL: snipName,
         text: snipDesc,
       })
         .then((snipID) => {
-
           db.tagObj.create({
             tagName: snipTag,
             cacheObjId: snipID.dataValues.id
           });
-        })
-
-
+        });
     }
   });
 
@@ -55,13 +42,14 @@ module.exports = function (app) {
   app.get('/getSnip/:param', function (req, res) {
     let param = req.params.param;
 
+    let currentDate = moment().format('MMMM Do YYYY, h:mm:ss a');
+
+    // param is all if user does not input a specific request
     if (param === 'all') {
       db.cacheObj.findAll({
         include: db.tagObj
       }).then(function (objects) {
-
         let caches = { renderedCaches: {} };
-
         objects.forEach((el) => {
           let tags = [];
           el.dataValues.tagObjs.forEach((el) => {
@@ -71,16 +59,15 @@ module.exports = function (app) {
           let cacheDataObj = {
             URL: el.dataValues.URL,
             Text: el.dataValues.text,
-            tagArray: tags, 
-            date: el.dataValues.createdAt
+            tagArray: tags,
+            date: currentDate
           };
           caches.renderedCaches[cacheID] = cacheDataObj;
         });
+        // send back a partial with layout set to false - so only HTML
         res.render('partials/home-cache-partials', Object.assign({ layout: false }, caches));
-
       });
     } else {
-
       // find all with a certin tag
       let cacheIds = [];
       db.tagObj.findAll({
@@ -111,19 +98,17 @@ module.exports = function (app) {
             let cacheDataObj = {
               URL: el.dataValues.URL,
               Text: el.dataValues.text,
-              tagArray: tags, 
-              date: el.dataValues.createdAt
+              tagArray: tags,
+              date: currentDate
             };
             caches.renderedCaches[cacheID] = cacheDataObj;
           });
+          // send back a partial with layout set to false - so only HTML
           res.render('partials/home-cache-partials', Object.assign({ layout: false }, caches));
         });
 
       });
     }
-
-
-
   });
 
 
@@ -138,7 +123,7 @@ module.exports = function (app) {
         cacheObjId: snipID
       }
     }).then((match) => {
-      console.log(match);
+     // only create tag if it doesnt already exist
       if (!Array.isArray(match) || !match.length) {
         if (newTag && snipID) {
           db.tagObj.create({
@@ -146,7 +131,6 @@ module.exports = function (app) {
             cacheObjId: snipID,
           })
             .then((snipID) => {
-              console.log(newTag, snipID);
               res.sendStatus('201');
             })
             .catch(() => res.sendStatus('400'));
@@ -202,17 +186,11 @@ module.exports = function (app) {
 
   // open external route to api
   app.get('/returnCaches/', function (req, res) {
- 
     db.cacheObj.findAll({
     }).then(function (objects) {
-
-      res.send(objects); 
-
-
+      res.send(objects);
     });
-  
-
-}); 
+  });
 
 };
 

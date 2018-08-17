@@ -7,49 +7,70 @@ $(document).ready(function () {
     let cacheDiv = $('#cache-div');
     let redditDiv = $('#reddit-div');
     let redditBtn = $('#reddit-btn');
-    let homeContent = $('#home-main-content');
 
-    //hide the reddit div on page load
-    redditDiv.hide(); 
+    let searchNav = $('#search-nav');
+    let cardDeck = $('.card-deck');
+    let redditQueryCol = $('.reddit-query-col');
 
+    //hide the reddit div and show the search navigation for the cache page load
+    redditDiv.hide();
+    searchNav.show();
 
-    // work around for page reloading
+    // Get all snippets when the page loads
+    $.ajax({
+        url: '/getSnip/all',
+        type: 'GET'
+    }).done((selectedSnips) => {
+        $('.card-deck').html(selectedSnips);
+        cardDeck.show();
+    });
+
     let user = sessionStorage.getItem('user');
 
     if (!user) {
         sessionStorage.setItem('user', 'active');
-        homeContent.addClass('animated');
-        cacheDiv.hide();
     } else {
-        $.ajax({
-            url: `/getSnip/all`,
-            type: 'GET'
-        }).done((selectedSnips) => {
-            $('.card-deck').html(selectedSnips);
-            homeContent.removeClass('animated');
-            cacheDiv.show();
-        })
+        $('html, body').animate({
+            scrollTop: $(cacheDiv).offset().top
+        }, 'slow');
     }
 
-    // Toggle feature for the personal cache div
+
+    // Toggle feature for the personal cache divand reddit div
     cacheBtn.click(function () {
-        cacheDiv.animate({
-            width: 'toggle'
-        });
-        redditDiv.hide()
+        if (!$(cacheDiv).is(":visible")) {
+            cacheDiv.animate({
+                width: 'toggle'
+            });
+            redditDiv.hide();
+            redditQueryCol.empty().hide();
+        }
     });
-    
+
     redditBtn.click(function () {
-        redditDiv.animate({
-            width: 'toggle'
-        });
-        cacheDiv.hide(); 
+        if (!$(redditDiv).is(":visible")) {
+            redditDiv.animate({
+                width: 'toggle'
+            });
+            cacheDiv.hide();
+        }
     });
+
+    // Highlight the button that is active
+    if ($(cacheDiv).is(":visible")) {
+        cacheBtn.addClass('border-white')
+        redditBtn.addClass('border-white')
+    }
+
+    if ($(redditDiv).is(":visible")) {
+        redditBtn.addClass('border-white')
+        cacheDiv.addClass('border-white')
+    }
+
 
     // Selectors for searching through reddit
     let searchredditBtn = $('#search-reddit-btn');
     let redditQuery = $('#search-reddit-input');
-    let redditClear = $('#reddit-clear-btn');
 
 
     //SELECTORS FOR PERSONAL CACHE BEGIN
@@ -62,7 +83,7 @@ $(document).ready(function () {
 
     // Selector for user searching through a snippet in personal cache, filtered by either tag or text param - or both
     let searchTag = $('.searchTags');
-    let clearTag = $('.clear-cache-search');
+    let getAllSnips = $('#get-all-snips');
 
     // Flags for removing tags from personal cache
     let removeTagBool = false;
@@ -73,20 +94,17 @@ $(document).ready(function () {
     };
     let userList = new List('search-tags', options);
 
-
-
-    // query reddit for some information
     // query reddit for some information
     searchredditBtn.click(function () {
         event.preventDefault();
-        $('.reddit-query-col').empty();
+        redditQueryCol.empty();
 
         if (redditQuery.val()) {
             let parseQuery = redditQuery.val().replace(/\/./g, ''); // remove all slashes and dots
             let requrl = 'https://www.reddit.com/search.json?&limit=10&sort=hot&sort=new&q=';
             let fullurl = requrl + parseQuery;
 
-            let queryHTML = '<h4 class="heading-font" style="var(--blue-color)">Results!</h4>';
+            let queryHTML = '<div class="heading-font row w-100 justify-content-center display-4" style="var(--blue-color)">Results!</div>';
 
             $.getJSON(fullurl, function (json) {
                 let myList = json.data.children;
@@ -95,9 +113,9 @@ $(document).ready(function () {
                     let obj = myList[i].data;
                     let title = obj.title;
                     let subrdturl = 'http://www.reddit.com/r/' + obj.subreddit + '/';
-                    let subrdt = obj.subreddit; 
+                    let subrdt = obj.subreddit;
 
-                    queryHTML += `<div class="row reddit-query-row m-2 justify-content-center">
+                    queryHTML += `<div class="row reddit-query-row m-2 justify-content-center col-lg-3 p-4">
                                     <div class="col-10 m-2 query-col">
                                         <h5 class="heading-font reddit-query-title">${subrdt}</h5>
                                     </div>
@@ -111,53 +129,49 @@ $(document).ready(function () {
                                         ${title}
                                         </p>
                                     </div>
-                                </div>`
+                                </div>
+                                `;
                 }
-                $('.reddit-query-col').append(queryHTML);
-                redditQuery.val(''); 
+                redditQueryCol.append(queryHTML);
+                redditQuery.val('');
             });
         } else {
-            alert('Cannot have empty query'); 
+            redditQuery.addClass('border-danger');
         }
 
     });
 
-    // clear the reddit element
-    redditClear.click(function () {
-        event.preventDefault();
-        $('.reddit-query-col').empty();
-        redditQuery.val('')
-
+    // Remove the red on click if the user is correcting an empty request
+    redditQuery.focus(function () {
+        if (redditQuery.hasClass('border-danger')) {
+            redditQuery.removeClass('border-danger');
+        }
     });
 
-    // PERSONAL CACHE FUNTIONALITY BEGINS
 
     // allow the user to pull all the caches objects or one selected
-    [searchTag, clearTag].forEach(function (el) {
-        el.click(function () {
+    [searchTag, getAllSnips].forEach(function (el) {
+        let param;
 
-            let param;
-            console.log(event.target.nodeName)
+        el.click(function () {
+            console.log(event.target.nodeName);
             if (event.target.nodeName === 'BUTTON') {
-                let value = $(this).parents('.input-group').children('.form-control').val();
-                if (value === '') {
-                    param = 'all'
-                }
+                param = 'all';
             } else {
-                param = $(this).text()
-            }; 
+                param = $(this).text();
+            }
 
             $.ajax({
                 url: `/getSnip/${param}`,
                 type: 'GET'
             }).done((selectedSnips) => {
-                $('.card-deck').html(selectedSnips)
+                $('.card-deck').html(selectedSnips);
 
             });
 
-        })
+        });
 
-    })
+    });
 
     // Button click event for when the user adds a snippet to their personal cache
     addSnipBtn.click(function () {
@@ -167,7 +181,7 @@ $(document).ready(function () {
                 snipName: newSnipName.val().trim(),
                 snipDesc: newSnipDesc.val().trim(),
                 snipTag: newSnipTag.val().trim(),
-            }
+            };
 
             // make sure it is an email address
             let expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
@@ -181,55 +195,77 @@ $(document).ready(function () {
                     data: snipObj
                 }).done((addSnip) => {
                     if (addSnip === 'Created') {
-                        console.log('Good creation');
                         newSnipName.val('');
                         newSnipDesc.val('');
                         newSnipTag.val('');
                         window.location.href = '/home';
                     } else {
-                        alert('Bad Request')
+                        alert('Bad Request');
                     }
                 });
             } else {
-                alert('That is not a URL');
+                newSnipName.addClass('border-danger');
             }
 
         } else {
-            alert('No Fields can be empty');
+            // if any of the inputs are empty, highlight them red
+            [newSnipName, newSnipDesc, newSnipTag].forEach(function (input) {
+                if ($(input).val() === '') {
+                    $(input).addClass('border-danger');
+                }
+            });
         }
     });
+
+    // Remove border if user is correcting a wrong input
+    [newSnipName, newSnipDesc, newSnipTag].forEach(function (input) {
+        $(input).focus(function () {
+            if ($(input).hasClass('border-danger')) {
+                $(input).removeClass('border-danger');
+            }
+        });
+
+    });
+
 
 
     // Add tag click event when adding to personal cache
     $(document).on('click', '.add-tag-btn', function () {
 
-        let snip = $($(this)).closest("[data-ID]");
-        let tagVal = snip.find('input')
+        let snip = $($(this)).closest('[data-ID]');
+        let tagVal = snip.find('input');
 
         if (tagVal.val()) {
 
-            let snipID = snip.data().id
+            let snipID = snip.data().id;
 
             let newTagObj = {
                 newTag: tagVal.val().trim(),
                 snipID: snipID
-            }
+            };
             $.ajax({
                 url: '/newSnipTag',
                 type: 'POST',
                 data: newTagObj
             }).done((newTag) => {
                 if (newTag === 'Created') {
-                    console.log('Good Tag creation');
-                    window.location.href = '/home'
-                    tagVal.val('')
+                    window.location.href = '/home';
+                    tagVal.val('');
                 } else {
-                    alert('Bad Request')
+                    alert('Bad Request');
                 }
             });
         } else {
-            alert('Cannot add empty Tag')
+            tagVal.addClass('border-danger')
         }
+
+          //Remove red if correcting error
+    tagVal.focus(function () {
+        if (tagVal.hasClass('border-danger')) {
+            tagVal.removeClass('border-danger');
+        }
+    });
+
     });
 
 
@@ -240,33 +276,32 @@ $(document).ready(function () {
         let badges = $(this).parents('.card').find('.cache-snippet-badge');
 
         for (let i = 0; i < badges.length; i++) {
-            $(badges[i]).addClass("bg-danger");
+            $(badges[i]).addClass('bg-danger');
             removeTagBool = true;
         }
 
-    })
+    });
 
     // once a user has chosen remove tag, all tags become red and can then be selected for deletion
     $(document).on('click', '.cache-snippet-badge', function () {
         if (removeTagBool && $(this).hasClass('bg-danger')) {
 
             let deleteSnip = {
-                snipID: $($(this)).closest("[data-ID]").data().id,
+                snipID: $($(this)).closest('[data-ID]').data().id,
                 removedTag: $(this).text()
-            }
+            };
 
             // remove the red from the elements and turn off boolean
-            $(this).removeClass("bg-danger");
+            $(this).removeClass('bg-danger');
             removedTagBool = false;
 
             $.ajax({
-                url: `/delSnipTag`,
+                url: '/delSnipTag',
                 type: 'DELETE',
                 data: deleteSnip
             }).done((delTag) => {
                 if (delTag === 'Accepted') {
-                    window.location.href = '/home'
-                    console.log('Tag deleted');
+                    window.location.href = '/home';
                     removeTagBool = false;
                 }
             });
@@ -277,15 +312,14 @@ $(document).ready(function () {
     // route for deleting an entire snippet
     $(document).on('click', '.delete-snippet', function () {
 
-        let snipID = $($(this)).closest("[data-ID]").data().id;
+        let snipID = $($(this)).closest('[data-ID]').data().id;
 
         $.ajax({
             url: `/delFullSnip/${snipID}`,
             type: 'DELETE',
         }).done((delSnip) => {
             if (delSnip === 'Accepted') {
-                window.location.href = '/home'
-                console.log('Snippet deleted');
+                window.location.href = '/home';
             }
         });
 
