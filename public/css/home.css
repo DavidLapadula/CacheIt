@@ -24,7 +24,10 @@ body {
     padding-bottom: 1rem;
     margin: 0;
     min-height: 100%;
-    background: url("../images/world_br.jpg") no-repeat center center fixed; 
+    background: url("../images/projs_br_5.jpg"); 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 a {
@@ -51,44 +54,17 @@ li {
     margin: 0 auto 100px auto; 
 }  
 
-.heading-font { 
-    font-family: 'Abril Fatface', cursive;
-}
 
-.content-font {
+.content-font, .heading-font {
     font-family: 'Roboto', sans-serif;
 } 
 
-/* Navbar Styling */
-
-#navbar { 
-    background-color: var(--blue-color); 
-}
-
-#db-nav-logo {
-    color: var(--yellow-color); 
-}
-
-#landing-logo {
-    width: 50px; 
-    border-radius: 50%; 
-}
-
-#logOut-btn, #projects-btn {
-    color: var(--blue-color); 
-    background-color: var(--yellow-color)
-}
-
-#logOut-btn:hover, #projects-btn:hover {
-    transform: rotateZ(-20deg);
-}
 
 /* Main Content Styling */
 
 #home-main-content {
     width: 100vw; 
 }
-
 
 .home-tile {
     background: rgba(255, 255, 255, 0.4);
@@ -118,9 +94,6 @@ li {
     max-width: 1000px;
     min-height: 200px; 
     background-color: white; 
-    border-style: inset; 
-    border-color: var(--yellow-color);
-    border-width: thick;
     background: rgba(196, 193, 193, 0.658);
 }
 
@@ -135,30 +108,11 @@ li {
 }
 
 
-/* Reddit Modal Styling */
-.modal-content {
-    border-style: inset; 
-    border-color: var(--yellow-color);
-    border-width: thick;
-}
-
-.modal-title {
-    color: var(--blue-color); 
-}
-
-.modal-header {
-    background: rgba(3, 17, 56, 0.4);
-}
-
 #reddit-clear-btn {
     background-color: var(--yellow-color);
     color: var(--blue-color)
 }
 
-#reddit-modal {
-    max-width: 500px; 
-    margin: auto; 
-}
 
 #custom-search-form {
     margin:0;
@@ -243,27 +197,10 @@ li {
     background-color: var(--blue-color);
 }
 
-.footer {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    padding: 1rem;
-    background-color: var(--blue-color);
-    color: var(--yellow-color);
-    text-align: center;
-  }
-
   .search-list {
     background: rgba(3, 17, 56, 0.4);
     border-style: inset; 
     border-color: var(--yellow-color);
-  }
-
-  .blue-border {
-    border-style: inset; 
-    border-color: var(--blue-color);
-    border-width: thick;
   }
 
  

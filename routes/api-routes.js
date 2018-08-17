@@ -1,7 +1,7 @@
-/* eslint-disable */
+
 
 // Requiring our models and passport as we've configured it
-var db = require("../models");
+var db = require('../models');
 
 module.exports = function (app) {
 
@@ -10,12 +10,25 @@ module.exports = function (app) {
   // Personal cache routes
 
   // add a cache bject
-  app.post("/newPersSnip", function (req, res) {
-    let { snipName, snipDesc, snipTag } = req.body;
+  app.post('/newPersSnip', function (req, res) {
+
+    let extensionInput; 
+ 
+
+    if(typeof req.body === 'string') {
+      extensionInput = JSON.parse(req.body); 
+    } else {
+      extensionInput = req.body; 
+    }
+
+    let { snipName, snipDesc, snipTag } = extensionInput;
+
 
     if (!snipName || !snipDesc || !snipTag) {
       res.sendStatus('400');
+      console.log('no')
     } else {
+      console.log('yes')
       res.sendStatus('201');
       console.log(snipName);
       console.log(snipDesc);
@@ -39,7 +52,7 @@ module.exports = function (app) {
 
 
   // search snippet by optional filters
-  app.get("/getSnip/:param", function (req, res) {
+  app.get('/getSnip/:param', function (req, res) {
     let param = req.params.param;
 
     if (param === 'all') {
@@ -47,25 +60,25 @@ module.exports = function (app) {
         include: db.tagObj
       }).then(function (objects) {
 
-        let caches = { renderedCaches: {} }
+        let caches = { renderedCaches: {} };
 
         objects.forEach((el) => {
           let tags = [];
           el.dataValues.tagObjs.forEach((el) => {
-            tags.push(el.dataValues.tagName)
-          })
+            tags.push(el.dataValues.tagName);
+          });
           let cacheID = el.dataValues.id;
           let cacheDataObj = {
             URL: el.dataValues.URL,
             Text: el.dataValues.text,
             tagArray: tags, 
             date: el.dataValues.createdAt
-          }
+          };
           caches.renderedCaches[cacheID] = cacheDataObj;
         });
-        res.render('partials/home-cache-partials', Object.assign({ layout: false }, caches))
+        res.render('partials/home-cache-partials', Object.assign({ layout: false }, caches));
 
-      })
+      });
     } else {
 
       // find all with a certin tag
@@ -77,7 +90,7 @@ module.exports = function (app) {
         include: db.cacheObj
       }).then(function (objects) {
         objects.forEach((el) => {
-          cacheIds.push(el.dataValues.cacheObj.id)
+          cacheIds.push(el.dataValues.cacheObj.id);
         });
       }).then(function () {
         // get all the cache objects with a matching id to the foreign key of the tags chosen
@@ -88,22 +101,22 @@ module.exports = function (app) {
           include: db.tagObj
         }).then(function (objects) {
           // construct an object and render it in the partial
-          let caches = { renderedCaches: {} }
+          let caches = { renderedCaches: {} };
           objects.forEach((el) => {
             let tags = [];
             el.dataValues.tagObjs.forEach((el) => {
-              tags.push(el.dataValues.tagName)
-            })
+              tags.push(el.dataValues.tagName);
+            });
             let cacheID = el.dataValues.id;
             let cacheDataObj = {
               URL: el.dataValues.URL,
               Text: el.dataValues.text,
               tagArray: tags, 
-              tagArray: tags, 
-            }
+              date: el.dataValues.createdAt
+            };
             caches.renderedCaches[cacheID] = cacheDataObj;
           });
-          res.render('partials/home-cache-partials', Object.assign({ layout: false }, caches))
+          res.render('partials/home-cache-partials', Object.assign({ layout: false }, caches));
         });
 
       });
@@ -116,7 +129,7 @@ module.exports = function (app) {
 
 
   // add a tag to a specific snippet
-  app.post("/newSnipTag", function (req, res) {
+  app.post('/newSnipTag', function (req, res) {
     let { newTag, snipID } = req.body;
 
     db.tagObj.findAll({
@@ -125,7 +138,7 @@ module.exports = function (app) {
         cacheObjId: snipID
       }
     }).then((match) => {
-      console.log(match)
+      console.log(match);
       if (!Array.isArray(match) || !match.length) {
         if (newTag && snipID) {
           db.tagObj.create({
@@ -133,22 +146,22 @@ module.exports = function (app) {
             cacheObjId: snipID,
           })
             .then((snipID) => {
-              console.log(newTag, snipID)
+              console.log(newTag, snipID);
               res.sendStatus('201');
             })
             .catch(() => res.sendStatus('400'));
         } else {
-          res.sendStatus('404')
+          res.sendStatus('404');
         }
       } else {
-        res.sendStatus('409')
+        res.sendStatus('409');
       }
-    })
+    });
   });
 
 
   // delete a tag from a specific snippet
-  app.delete("/delSnipTag/", function (req, res) {
+  app.delete('/delSnipTag/', function (req, res) {
     let { snipID, removedTag } = req.body;
 
     if (snipID && removedTag) {
@@ -159,7 +172,7 @@ module.exports = function (app) {
         }
       })
         .then(function () {
-          res.sendStatus('202')
+          res.sendStatus('202');
         });
     } else {
       res.sendStatus('400');
@@ -169,7 +182,7 @@ module.exports = function (app) {
 
 
   // delete an entire snippet
-  app.delete("/delFullSnip/:snipID", function (req, res) {
+  app.delete('/delFullSnip/:snipID', function (req, res) {
     let snipID = req.params.snipID;
 
     if (!snipID) {
@@ -181,12 +194,25 @@ module.exports = function (app) {
         }
       })
         .then(function () {
-          res.sendStatus('202')
+          res.sendStatus('202');
         });
     }
   });
 
 
+  // open external route to api
+  app.get('/returnCaches/', function (req, res) {
+ 
+    db.cacheObj.findAll({
+    }).then(function (objects) {
+
+      res.send(objects); 
+
+
+    });
+  
+
+}); 
 
 };
 

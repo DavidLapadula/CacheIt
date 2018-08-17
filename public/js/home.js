@@ -1,35 +1,20 @@
-/* eslint-disable */
+
 $(document).ready(function () {
 
     // Selectors for the interactive elements on the page 
     let cacheBtn = $('#cache-btn');
 
     let cacheDiv = $('#cache-div');
+    let redditDiv = $('#reddit-div');
+    let redditBtn = $('#reddit-btn');
     let homeContent = $('#home-main-content');
 
-
-    // function onReady(callback) {
-    //     var intervalId = window.setInterval(function () {
-    //         if (document.getElementsByTagName('body')[0] !== undefined) {
-    //             window.clearInterval(intervalId);
-    //             callback.call(this);
-    //         }
-    //     }, 1000);
-    // }
-
-    // function setVisible(selector, visible) {
-    //     document.querySelector(selector).style.display = visible ? 'block' : 'none';
-    // }
-
-    // onReady(function () {
-    //     setVisible('.page', true);
-    //     setVisible('#loading', false);
-    // });
+    //hide the reddit div on page load
+    redditDiv.hide(); 
 
 
     // work around for page reloading
     let user = sessionStorage.getItem('user');
-    sessionStorage.setItem('user', 'active');
 
     if (!user) {
         sessionStorage.setItem('user', 'active');
@@ -43,7 +28,6 @@ $(document).ready(function () {
             $('.card-deck').html(selectedSnips);
             homeContent.removeClass('animated');
             cacheDiv.show();
-
         })
     }
 
@@ -52,21 +36,20 @@ $(document).ready(function () {
         cacheDiv.animate({
             width: 'toggle'
         });
-
+        redditDiv.hide()
+    });
+    
+    redditBtn.click(function () {
+        redditDiv.animate({
+            width: 'toggle'
+        });
+        cacheDiv.hide(); 
     });
 
     // Selectors for searching through reddit
     let searchredditBtn = $('#search-reddit-btn');
     let redditQuery = $('#search-reddit-input');
     let redditClear = $('#reddit-clear-btn');
-
-    // selectors to  populate the div with reddit queries
-    let redditQueryRow = $('.redditQueryRow'); //add a new row with limited amount of queries
-    let redditQueryCol = $('.reddit-query-col'); //append all queries to the row once the query has been made
-    // each selectorsed to populate the new row
-    let redditQueryTitle = $('.reddit-query-title')
-    let redditQueryURL = $('.reddit-query-url')
-    let redditQueryText = $('.reddit-query-text')
 
 
     //SELECTORS FOR PERSONAL CACHE BEGIN
@@ -96,23 +79,23 @@ $(document).ready(function () {
     // query reddit for some information
     searchredditBtn.click(function () {
         event.preventDefault();
-        $('.reddit-query-col').empty(); 
-        
+        $('.reddit-query-col').empty();
+
         if (redditQuery.val()) {
             let parseQuery = redditQuery.val().replace(/\/./g, ''); // remove all slashes and dots
-            let requrl = "https://www.reddit.com/search.json?&limit=10&sort=hot&sort=new&q=";
+            let requrl = 'https://www.reddit.com/search.json?&limit=10&sort=hot&sort=new&q=';
             let fullurl = requrl + parseQuery;
 
-            let queryHTML = '<h4 class="heading-font" style="var(--blue-color)">Results!</h4>'; 
+            let queryHTML = '<h4 class="heading-font" style="var(--blue-color)">Results!</h4>';
 
             $.getJSON(fullurl, function (json) {
                 let myList = json.data.children;
 
-                for (var i=0, l=myList.length && 3; i<l; i++) {
+                for (var i = 0, l = myList.length && 3; i < l; i++) {
                     let obj = myList[i].data;
                     let title = obj.title;
-                    let subrdturl = "http://www.reddit.com/r/"+obj.subreddit+"/";
-                    let subrdt = obj.subreddit;
+                    let subrdturl = 'http://www.reddit.com/r/' + obj.subreddit + '/';
+                    let subrdt = obj.subreddit; 
 
                     queryHTML += `<div class="row reddit-query-row m-2 justify-content-center">
                                     <div class="col-10 m-2 query-col">
@@ -131,19 +114,19 @@ $(document).ready(function () {
                                 </div>`
                 }
                 $('.reddit-query-col').append(queryHTML);
-                redditQuery.val('') 
+                redditQuery.val(''); 
             });
         } else {
-            alert('Cannot have empty query')
+            alert('Cannot have empty query'); 
         }
 
-    }); 
+    });
 
     // clear the reddit element
     redditClear.click(function () {
         event.preventDefault();
-        $('.reddit-query-col').empty(); 
-        redditQuery.val('') 
+        $('.reddit-query-col').empty();
+        redditQuery.val('')
 
     });
 
@@ -162,13 +145,12 @@ $(document).ready(function () {
                 }
             } else {
                 param = $(this).text()
-            }
+            }; 
 
             $.ajax({
                 url: `/getSnip/${param}`,
                 type: 'GET'
             }).done((selectedSnips) => {
-
                 $('.card-deck').html(selectedSnips)
 
             });
@@ -232,16 +214,11 @@ $(document).ready(function () {
                 newTag: tagVal.val().trim(),
                 snipID: snipID
             }
-
             $.ajax({
                 url: '/newSnipTag',
                 type: 'POST',
                 data: newTagObj
             }).done((newTag) => {
-
-                console.log(newTag);
-
-
                 if (newTag === 'Created') {
                     console.log('Good Tag creation');
                     window.location.href = '/home'
@@ -249,7 +226,6 @@ $(document).ready(function () {
                 } else {
                     alert('Bad Request')
                 }
-
             });
         } else {
             alert('Cannot add empty Tag')
@@ -298,6 +274,7 @@ $(document).ready(function () {
     });
 
 
+    // route for deleting an entire snippet
     $(document).on('click', '.delete-snippet', function () {
 
         let snipID = $($(this)).closest("[data-ID]").data().id;

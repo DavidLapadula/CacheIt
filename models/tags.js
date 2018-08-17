@@ -1,4 +1,4 @@
-/*eslint-disable */
+
 
 // snippet object model
 

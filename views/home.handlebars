@@ -1,5 +1,5 @@
 {{!-- Style Sheet for home page --}}
-<link type="text/css" rel="stylesheet" href="css/home.css"> {{!-- Navbar Styling --}}
+<link type="text/css" rel="stylesheet" href="css/home.css"> {{!-- Navbar Styling --}} {{!--
 <nav id="navbar" class="navbar">
     <div class="d-flex align-items-center justify-content-between w-100">
         <a id="logOut-btn" href="/" class="p-1 btn rounded-0 heading-font h5 mr-2">Go Home</a>
@@ -7,12 +7,10 @@
             <img id="landing-logo" src="images/usb_logo.png" class="mr-2 h-50">
         </div>
     </div>
-</nav>
-
-{{!-- Main Contant begins --}}
+</nav> --}} {{!-- Main Contant begins --}}
 <div class="main">
-    <div id="home-main-content" class="m-2 zoomIn p-1">
-        <div class="row home-tile-row p-1 m-1 justify-content-center">
+    <div id="home-main-content" class="zoomIn">
+        <div class="row home-tile-row justify-content-center">
             <div class="col-md-3 col-sm-4 home-tile m-2 p-2 d-flex flex-column">
                 <h4 class="text-center heading-font mt-2 tile-header"> The Cache</h4>
                 <img src="images/home-cache.png" class="img-fluid h-50 w-75 rounded mx-auto home-tile-img">
@@ -60,92 +58,71 @@
             </div>
         </div>
     </div>
-
-    <div class="footer content-font">
-        <i class="far fa-copyright"></i> HACKEDD Development Team 2018
-    </div>
-</div>
-</div>
-</div>
-
-{{!-- Query Reddit Modal --}}
-<div class="modal fade" id="reddit-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-    <div id="reddit-modal" class="modal-dialog modal-small" role="document">
-        <div class="modal-content rounded-0">
-            <div class="modal-header m-2">
-                <h5 class="modal-title heading-font text-center">Ask Reddit</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="span12 w-100 d-flex justify-content-center">
-                        <form id="custom-search-form" class="form-search form-horizontal w-100">
-                            <div class="input-append span12 w-100 d-flex justify-content-center">
-                                <input id="search-reddit-input" type="text" class="search-query w-75" placeholder="Search">
-                                <button type="button" id="search-reddit-btn">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            <div class="reddit-query-col">
-
-            </div>
-            <div class="modal-footer">
-                <button id="reddit-clear-btn" type="button" class="btn btn-block rounded-0 content-font">Clear</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-{{!-- Add Snippet Modal --}}
-<div class="modal fade" id="add-snip-modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-small" role="document">
-        <div class="modal-content rounded-0">
-            <div class="modal-header m-2">
-                <h5 class="modal-title heading-font text-center">Add Snippet</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form class="heading-font">
-                    <div class="form-group mt-2 mb-2">
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="fab fa-internet-explorer m-2 text-secondary"></i>
-                            </span>
-                            <input id="new-snip-name" type="text" class="form-control" placeholder="URL" required="required">
-                        </div>
-                    </div>
-                    <div class="form-group mt-2 mb-2">
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="far fa-comments text-secondary m-2"></i>
-                            </span>
-                            <input id="new-snip-desc" class="form-control form-control-lg" placeholder="Text" required="required">
-                        </div>
-                    </div>
-                    <div class="form-group mt-2 mb-2">
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="fas fa-tags m-2 text-secondary"></i>
-                            </span>
-                            <input id="new-snip-tag" class="form-control" placeholder="Begginer tag">
-                        </div>
+    <div id="reddit-div" class="home-main-div mx-auto">
+        <div class="row">
+            <div class="span12 w-100 d-flex justify-content-center">
+                <form id="custom-search-form" class="form-search form-horizontal w-100">
+                    <div class="input-append span12 w-100 d-flex justify-content-center">
+                        <input id="search-reddit-input" type="text" class="search-query w-75" placeholder="Search">
+                        <button type="button" id="search-reddit-btn">
+                            <i class="fa fa-search"></i>
+                        </button>
                     </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button id="add-snip-btn" type="button" class="btn btn-block rounded-0 content-font">Add!</button>
+        </div>
+        <div class="reddit-query-col">
+
+        </div>
+        <div class="">
+            <button id="reddit-clear-btn" type="button" class="btn btn-block rounded-0 content-font">Clear</button>
+        </div>
+    </div>
+
+    {{!-- Add Snippet Modal --}}
+    <div class="modal fade" id="add-snip-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-small" role="document">
+            <div class="modal-content rounded-0">
+                <div class="modal-header m-2">
+                    <h5 class="modal-title heading-font text-center">Add Snippet</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="heading-font">
+                        <div class="form-group mt-2 mb-2">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fab fa-internet-explorer m-2 text-secondary"></i>
+                                </span>
+                                <input id="new-snip-name" type="text" class="form-control" placeholder="URL" required="required">
+                            </div>
+                        </div>
+                        <div class="form-group mt-2 mb-2">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="far fa-comments text-secondary m-2"></i>
+                                </span>
+                                <input id="new-snip-desc" class="form-control form-control-lg" placeholder="Text" required="required">
+                            </div>
+                        </div>
+                        <div class="form-group mt-2 mb-2">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fas fa-tags m-2 text-secondary"></i>
+                                </span>
+                                <input id="new-snip-tag" class="form-control" placeholder="Begginer tag">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button id="add-snip-btn" type="button" class="btn btn-block rounded-0 content-font">Add!</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-{{!-- Home Page Javascript File --}}
-<script src="js/home.js"></script>
+    {{!-- Home Page Javascript File --}}
+    <script src="js/home.js"></script>

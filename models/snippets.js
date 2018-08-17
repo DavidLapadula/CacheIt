@@ -1,4 +1,4 @@
-/*eslint-disable */
+
 
 // making the model for the entire cache object
 module.exports = function(sequelize, DataTypes) {
