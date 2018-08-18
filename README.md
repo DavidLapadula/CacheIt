@@ -2,8 +2,8 @@
 
 A playground for users to store, sort, and find information relating to Bookmarks and information in general. For programmers, this information can include code repositories and snippets as well.
 
-## Heroku Link
-https://cache-it.herokuapp.com/ 
+## Check it out here
+If you want to see it live, check it out  [here](https://salty-scrubland-59294.herokuapp.com)
 
 
 ## Getting Started
