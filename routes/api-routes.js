@@ -3,8 +3,7 @@
 // Requiring our models and passport as we've configured it
 let db = require('../models');
 let moment = require('moment');
-
-
+ 
 module.exports = function (app) {
 
   // add a cache bject
@@ -49,8 +48,10 @@ module.exports = function (app) {
       db.cacheObj.findAll({
         include: db.tagObj
       }).then(function (objects) {
+        // make object for all caches returned
         let caches = { renderedCaches: {} };
         objects.forEach((el) => {
+          // store all the associated tags from the object
           let tags = [];
           el.dataValues.tagObjs.forEach((el) => {
             tags.push(el.dataValues.tagName);
@@ -62,6 +63,7 @@ module.exports = function (app) {
             tagArray: tags,
             date: currentDate
           };
+        // make the full object of all caches and snippets to be passed into the templatng engine
           caches.renderedCaches[cacheID] = cacheDataObj;
         });
         // send back a partial with layout set to false - so only HTML
@@ -115,6 +117,7 @@ module.exports = function (app) {
 
   // add a tag to a specific snippet
   app.post('/newSnipTag', function (req, res) {
+
     let { newTag, snipID } = req.body;
 
     db.tagObj.findAll({

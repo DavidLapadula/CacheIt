@@ -1,13 +1,11 @@
 
 $(document).ready(function () {
-
+    
     // Selectors for the interactive elements on the page 
     let cacheBtn = $('#cache-btn');
-
     let cacheDiv = $('#cache-div');
     let redditDiv = $('#reddit-div');
     let redditBtn = $('#reddit-btn');
-
     let searchNav = $('#search-nav');
     let cardDeck = $('.card-deck');
     let redditQueryCol = $('.reddit-query-col');
@@ -25,6 +23,7 @@ $(document).ready(function () {
         cardDeck.show();
     });
 
+    // Scroll to the search bar if there is an active session
     let user = sessionStorage.getItem('user');
 
     if (!user) {
@@ -81,7 +80,7 @@ $(document).ready(function () {
     let newSnipTag = $('#new-snip-tag');
     let addSnipBtn = $('#add-snip-btn');
 
-    // Selector for user searching through a snippet in personal cache, filtered by either tag or text param - or both
+    // Selector for user searching through a snippet in personal cache
     let searchTag = $('.searchTags');
     let getAllSnips = $('#get-all-snips');
 
@@ -99,7 +98,7 @@ $(document).ready(function () {
         event.preventDefault();
         redditQueryCol.empty();
 
-        if (redditQuery.val()) {
+        if (redditQuery.val()) { 
             let parseQuery = redditQuery.val().replace(/\/./g, ''); // remove all slashes and dots
             let requrl = 'https://www.reddit.com/search.json?&limit=10&sort=hot&sort=new&q=';
             let fullurl = requrl + parseQuery;
@@ -243,6 +242,7 @@ $(document).ready(function () {
                 newTag: tagVal.val().trim(),
                 snipID: snipID
             };
+            tagVal.val('');
             $.ajax({
                 url: '/newSnipTag',
                 type: 'POST',
@@ -251,8 +251,6 @@ $(document).ready(function () {
                 if (newTag === 'Created') {
                     window.location.href = '/home';
                     tagVal.val('');
-                } else {
-                    alert('Bad Request');
                 }
             });
         } else {

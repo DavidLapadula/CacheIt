@@ -1,7 +1,4 @@
-
-
 // snippet object model
-
 module.exports = function(sequelize, DataTypes) {
     let tagObj = sequelize.define('tagObj', {
         tagName: {
@@ -11,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
                 len: [1, 20]
             }
         }
-    });
+    }); 
 
     tagObj.associate = function(models) {
         tagObj.belongsTo(models.cacheObj, { 

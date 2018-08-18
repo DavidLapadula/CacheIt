@@ -164,7 +164,6 @@ text-align: center;
 line-height: 40px; 
 }
 
-
 @media screen and (max-width: 475px) { 
   .overlay-info {
     font-size: 100%; 

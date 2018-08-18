@@ -1,6 +1,3 @@
-
-
-
 $(document).ready(function () {
 
 	// Selectors for the floating icon and background that it shows when clickced

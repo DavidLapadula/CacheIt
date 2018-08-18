@@ -1,15 +1,13 @@
-{{!-- Partial for each of the snippets retrieved by the query --}}
-
-{{#each renderedCaches}}
+{{!-- Partial for each of the snippets retrieved by the query --}} {{#each renderedCaches}}
 <div class="card main-card rounded-0 p-2 shadow-lg blue-border m-2" data-ID="{{@key}}">
-    <div class="card-header heading-font">   
-        Last Updated <br>
-     {{this.date}}
-    </div> 
     <div class="card-header pr-0 pl-0 pb-2">
         {{#each this.tagArray}}
-        <span class="badge cache-snippet-badge badge-pill badge-warning content-font">{{this}}</span>
+        <span class="badge cache-snippet-badge badge-pill badge-warning content-font m-1">{{this}}</span>
         {{/each}}
+    </div>
+    <div class="heading-font mt-1">
+        Last Updated
+        <br> {{this.date}}
     </div>
     <div class="card-block heading-font">
         <ul class="nav nav-tabs m-2" role="tablist">
@@ -34,7 +32,7 @@
             <div role="tabpanel" class=" active show tab-pane fade" id="{{@key}}2">
                 <div class="query-col">
                     <h5 class="heading-font">
-                        <a target="_blank" class="cache-snip-url" href="{{this.URL}}">{{this.URL}}</a>
+                        <a target="_blank" class="cache-snip-url" href="{{this.URL}}">URL!</a>
                     </h5>
                 </div>
                 <div class="query-col">
@@ -43,8 +41,7 @@
                     </p>
                 </div>
             </div>
-        </div> 
+        </div>
     </div>
-</div> 
+</div>
 {{/each}}
-

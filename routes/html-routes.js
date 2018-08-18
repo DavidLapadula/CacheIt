@@ -3,7 +3,7 @@
 var db = require('../models');
 
 module.exports = function (app) {
-
+ 
     // Hit the main route
     app.get('/', function (req, res) {
         res.render('landing');
@@ -11,8 +11,8 @@ module.exports = function (app) {
 
     // hit users home page
     app.get('/home', function (req, res) {
-        //get all the tags from the database
 
+        //get all the tags from the database, use set timeout to prevent page  loading before tags do
         setTimeout(function () {
             db.tagObj.findAll({
             }).then(function (tags) {
