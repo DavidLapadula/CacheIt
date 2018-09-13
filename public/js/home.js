@@ -138,6 +138,8 @@ $(document).ready(function () {
             redditQuery.addClass('border-danger');
         }
 
+        console.log('hey'); 
+
     });
 
     // Remove the red on click if the user is correcting an empty request

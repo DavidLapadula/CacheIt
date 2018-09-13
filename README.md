@@ -1,14 +1,19 @@
 # CACHE-IT
 
-A playground for users to store, sort, and find information relating to Bookmarks and information in general. For programmers, this information can include code repositories and snippets as well.
+A playground for users to store, sort, and find information relating to Bookmarks and information in general. Users can search through 'tags' for information they find intersting, or add some information of their own. For programmers, this information can include code repositories and snippets as well.
+
+## Motivation
+
+This is a Full stack application that utilizes a variety of client-side and server-side tools. The project was designed to incorporate all areas of web development in one project to provide an easy to use and useful application. 
+
 
 ## Check it out here
-If you want to see it live, check it out  [here](https://salty-scrubland-59294.herokuapp.com)
+If you want to see it live, check it out  [here](https://cacheittoday.herokuapp.com/)
 
+## Screenshots
 
-## Getting Started
+![](./public/images/cacheit.gif)
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. Clone the Cache-It repository (https://github.com/...../Cache-It.git) and then create a MySQL database called cache-it_db.
 
 ### NPM Dependencies
 
