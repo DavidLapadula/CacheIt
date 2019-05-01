@@ -26,8 +26,6 @@ If you want to see it live, check it out  [here](https://cacheittoday.herokuapp.
 * method-override: 2.3.7
 * mysql2: 1.6.1
 * nodemon: 1.18.3
-* passport: 0.4.0
-* passport-local: 1.0.0
 * path: 0.12.7
 * sequelize: 4.38.0
 * Mocha JavaScript test framework - [Documentation](https://mochajs.org/)
